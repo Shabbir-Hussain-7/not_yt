@@ -1,24 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import SearchBar from './SearchBar.jsx';
+import React from 'react';
+import SearchResults from './SearchResults.jsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Play from './Play.jsx';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <BrowserRouter>
+      <div className="App">
+        <h1>YouTube Search</h1>
+        <SearchBar />
+        <Routes>
+          <Route path="/search/:searchTerm" element={<SearchResults />} />  
+          <Route path="/play/:videoId" element={<Play />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+    </>
   );
 }
 
