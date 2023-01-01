@@ -4,6 +4,7 @@ import Videos from "./Videos";
 import { useParams } from "react-router-dom";
 import fetchData from "./fetchData";
 import { Stack } from "@mui/system";
+import SearchBar from "./SearchBar";
 
 const SearchResults = () => {
     // get parameters
@@ -18,6 +19,7 @@ const SearchResults = () => {
     }, [searchTerm]);
     return (
         <Stack>
+            <SearchBar />
             <Box style={{ display: "flex", justifyContent: "center"}}>
             <Videos videos={videos} setVideos={setVideos} />   
             </Box>

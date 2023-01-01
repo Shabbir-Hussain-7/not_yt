@@ -1,21 +1,23 @@
 import './App.css';
-import SearchBar from './SearchBar.jsx';
 import React from 'react';
 import SearchResults from './SearchResults.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Play from './Play.jsx';
-
+import Home from './Home.jsx';
+import Login from './Login.jsx';
+import { useGlobalContext } from './context';
 
 function App() {
+  const { isAuthenticated } = useGlobalContext();
+  console.log("isAuthenticated", isAuthenticated);
   return (
     <>
     <BrowserRouter>
       <div className="App">
-        <h1>YouTube Search</h1>
-        <SearchBar />
         <Routes>
-          <Route path="/search/:searchTerm" element={<SearchResults />} />  
-          <Route path="/play/:videoId" element={<Play />} />
+          <Route exact path="/" element={isAuthenticated ? <Home /> : <Login />} />
+          <Route exact path="/search/:searchTerm" element={isAuthenticated ? <SearchResults /> : <Login />} />
+          <Route path="/play/:videoId" element={isAuthenticated ? <Play /> : <Login />} />
         </Routes>
       </div>
     </BrowserRouter>
